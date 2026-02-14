@@ -14,6 +14,8 @@ export function ArticlesListPage() {
         const response = await fetch('http://localhost:1337/api/articles');
         const json: { data: Article[] } = await response.json();
         setArticles(json.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch articles');
       } finally {
         setLoading(false);
       }
@@ -55,15 +57,14 @@ export function ArticlesListPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="mb-12 text-center">
-          <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mb-4">
+          <h1 className="text-5xl font-bold text-slate-200  mb-4">
             Articles
           </h1>
-          <p className="text-gray-400 text-lg">Discover insights and stories</p>
         </div>
 
         {/* Search Input */}
         <div className="relative mb-8 group">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
             <svg
               className="h-5 w-5 text-gray-400 group-focus-within:text-blue-400 transition-colors"
               fill="none"
