@@ -1,111 +1,155 @@
-// Import React hooks: useState for managing component state, useEffect for side effects (like fetching data)
-// ChangeEvent is a TypeScript type for input change events
 import { useState, useEffect, ChangeEvent } from "react";
-
-// Import Link from react-router-dom for navigation between pages
 import { Link } from "react-router-dom";
-
-// Import types and helper function from our data module
 import { Article } from "../data/articles";
 
-// Define a functional component (React's way of creating reusable UI pieces)
-// This component displays a list of articles with search functionality
 export function ArticlesListPage() {
-  // useState hook: Creates state variables that trigger re-renders when updated
-  // articles: Array of Article objects, initially empty
   const [articles, setArticles] = useState<Article[]>([]);
-  // loading: Boolean to show loading state, initially true
   const [loading, setLoading] = useState(true);
-  // error: String or null for error messages
   const [error, setError] = useState<string | null>(null);
-  // query: String for search input, initially empty
   const [query, setQuery] = useState("");
 
-  // useEffect hook: Runs side effects (like API calls) after the component renders
-  // Empty dependency array [] means it runs only once, on mount (like componentDidMount in class components)
   useEffect(() => {
-    // Define an async function inside useEffect to fetch data
     const fetchArticles = async () => {
       try {
-        // Fetch data from Strapi API (note: ?populate=* was added earlier to include all fields)
         const response = await fetch('http://localhost:1337/api/articles');
-        // Throw error if response not ok (e.g., 404, 500)
-        // if (!response.ok) throw new Error('Failed to fetch articles');
-        // Parse JSON response
         const json: { data: Article[] } = await response.json();
-        // Transform Strapi data to our Article format using the helper function
-        // Update state with transformed articles (triggers re-render)
         setArticles(json.data);
-      }  finally {
-        // Always set loading to false, whether success or error
+      } finally {
         setLoading(false);
       }
     };
-    // Call the async function
     fetchArticles();
   }, []);
 
-  // Event handler for input change: Updates query state as user types
-  // e: ChangeEvent<HTMLInputElement> is TypeScript for the event object
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value); // e.target.value is the input's current value
+    setQuery(e.target.value);
   };
 
-  // Filter articles based on search query: Computed on every render
-  // Uses array.filter to find articles where title or summary includes the query (case-insensitive)
   const filtered = articles.filter(a =>
     `${a.title} ${a.summary}`.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Conditional rendering: Show loading message if still fetching
-  if (loading) return <div style={{ maxWidth: 800, margin: "0 auto", padding: 16 }}>Loading articles...</div>;
-  // Show error message if fetch failed
-  if (error) return <div style={{ maxWidth: 800, margin: "0 auto", padding: 16 }}>{error}</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-400 text-lg">Loading articles...</p>
+        </div>
+      </div>
+    );
+  }
 
-  // JSX return: Describes the UI structure (React's syntax for HTML-like elements)
-  // This is the main render output of the component
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+        <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-6 max-w-md">
+          <p className="text-red-400">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    // Container div with inline styles (React allows CSS-in-JS)
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: 16 }}>
-      <h1>Articles</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header Section */}
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mb-4">
+            Articles
+          </h1>
+          <p className="text-gray-400 text-lg">Discover insights and stories</p>
+        </div>
 
-      {/* Controlled input: Value tied to state, onChange updates state */}
-      <input
-        type="text"
-        placeholder="Search for articles..."
-        value={query} // Controlled by state
-        onChange={handleChange} // Calls handler on change
-        style={{ width: "100%", padding: 8, marginBottom: 16 }}
-      />
-
-      {/* Conditional rendering with ternary operator: Show message or list */}
-      {filtered.length === 0 ? (
-        <p>No results.</p>
-      ) : (
-        // Unordered list for articles
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {/* Map over filtered articles: Render a list item for each */}
-          {/* Key prop is required for React to track list items efficiently */}
-          {filtered.map(article => (
-            <li
-              key={article.id} // Unique key for each item
-              style={{
-                border: "1px solid #ddd",
-                padding: 12,
-                marginBottom: 8,
-                borderRadius: 4
-              }}
+        {/* Search Input */}
+        <div className="relative mb-8 group">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg
+              className="h-5 w-5 text-gray-400 group-focus-within:text-blue-400 transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              {/* Display article title and summary */}
-              <h2 style={{ margin: "0 0 4px" }}>{article.title}</h2>
-              <p style={{ margin: "0 0 8px" }}>{article.summary}</p>
-              {/* Link component from react-router-dom: Navigates to article details page */}
-              <Link to={`/articles/${article.id}`}>Read more...</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+          <input
+            type="text"
+            placeholder="Search for articles..."
+            value={query}
+            onChange={handleChange}
+            className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-sm transition-all duration-300 hover:bg-gray-800/70"
+          />
+        </div>
+
+        {/* Results */}
+        {filtered.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/50 mb-4">
+              <svg
+                className="w-8 h-8 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <p className="text-gray-400 text-lg">No results found.</p>
+            <p className="text-gray-600 text-sm mt-2">Try adjusting your search terms</p>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {filtered.map(article => (
+              <article
+                key={article.id}
+                className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+              >
+                {/* Subtle gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-2xl transition-all duration-300"></div>
+                
+                <div className="relative">
+                  <h2 className="text-2xl font-bold text-gray-100 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
+                    {article.title}
+                  </h2>
+                  <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+                    {article.summary}
+                  </p>
+                  <Link
+                    to={`/articles/${article.id}`}
+                    className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
+                  >
+                    Read more
+                    <svg
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-
