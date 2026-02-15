@@ -33,7 +33,7 @@ export function ArticlesListPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen  flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-400 text-lg">Loading articles...</p>
@@ -44,7 +44,7 @@ export function ArticlesListPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen  flex items-center justify-center">
         <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-6 max-w-md">
           <p className="text-red-400">{error}</p>
         </div>
@@ -53,15 +53,8 @@ export function ArticlesListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl font-bold text-slate-200  mb-4">
-            Articles
-          </h1>
-        </div>
-
         {/* Search Input */}
         <div className="relative mb-8 group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
