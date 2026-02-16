@@ -2,15 +2,15 @@ import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
-import { Layout } from './components/Layout'
 import { ArticleDetailsPage } from './components/ArticleDetails'
 import { ArticlesListPage } from './components/ArticlesList'
 import { About } from './components/About'
+import App from './App'
 
 const router = createBrowserRouter([
   {
-    path: "",
-    element: <Layout />,
+    path: "/",
+    element: <App />,
     children: [
       {
         index: true,

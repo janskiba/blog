@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Article } from "../data/articles";
+import type { Article } from "../data/articles";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();

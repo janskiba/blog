@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { Menu } from './components/Menu'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="min-h-screen bg-gradient-to-br  from-gray-900 via-gray-800 to-gray-900">
+      <header className="sticky top-0 backdrop-blur-md border-b border-b-slate-600 z-20">
+        <div className=" mx-auto  ">
+          <Menu />
+        </div>
       </header>
+      <main>
+        <Outlet />
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

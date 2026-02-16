@@ -1,6 +1,6 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import { Article } from "../data/articles";
+import type { Article } from "../data/articles";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
