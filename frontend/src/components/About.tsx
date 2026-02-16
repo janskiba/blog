@@ -43,23 +43,23 @@ export function About() {
                 <h2 className="text-2xl font-bold text-gray-100">
                   About me
                 </h2>
-                <p className="mt-2 text-gray-400 leading-relaxed">
+                <p className="mt-2 text-gray-300 leading-relaxed">
                   I’m a software developer focused on building modern, maintainable web applications—mostly in the Angular ecosystem.
                   I enjoy turning complex requirements into clean UI, solid architecture, and reliable delivery pipelines.
                 </p>
               </div>
 
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 My go-to stack includes Angular and Angular Material, along with TypeScript and SCSS.
                 I also have extensive experience in working with complex maps in a leaflet.
               </p>
 
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 Quality matters to me, so I regularly write automated tests with Cypress, Playwright, and Jasmine.
                 On the tooling side, I’m comfortable with Linux, Docker, Jenkins, Bitbucket, Git, and Jira.
               </p>
 
-              <p className="text-gray-500">
+              <p className="text-gray-400">
                 When I’m not coding, I’m usually listening to heavy music, playing guitar, or spending time with my wife and our dog.
               </p>
 
