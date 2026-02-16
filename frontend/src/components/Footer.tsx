@@ -78,16 +78,16 @@ export function Footer() {
           {/* Nav (links only) */}
           <nav
             aria-label="Footer navigation"
-            className="md:justify-self-end md:w-[220px] md:border-l md:border-gray-800/60 md:pl-6"
+            className="md:justify-self-end md:w-55 md:border-l md:border-gray-800/60 md:pl-6"
           >
             <h3 className="text-sm font-semibold text-gray-200">Navigation</h3>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link
                   className="text-gray-400 hover:text-gray-100 transition"
-                  to="/articles"
+                  to="/blog"
                 >
-                  Articles
+                  Blog
                 </Link>
               </li>
               <li>
@@ -101,7 +101,7 @@ export function Footer() {
               <li>
                 <Link
                   className="text-gray-400 hover:text-gray-100 transition"
-                  to="/contact"
+                  to="mailto:jan.skiba.poczta@proton.me"
                 >
                   Contact
                 </Link>

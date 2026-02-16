@@ -51,7 +51,7 @@ export function About() {
 
               <p className="text-gray-300 leading-relaxed">
                 My go-to stack includes Angular and Angular Material, along with TypeScript and SCSS.
-                I also have extensive experience in working with complex maps in a leaflet.
+                I also have extensive experience in working with complex maps in leaflet.
               </p>
 
               <p className="text-gray-300 leading-relaxed">

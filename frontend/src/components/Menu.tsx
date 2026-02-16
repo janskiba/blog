@@ -1,21 +1,26 @@
 // components/MenuPills.tsx
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const items = [
     { to: "/about", label: "About" },
     { to: "/blog", label: "Blog" },
+    { to: "mailto:jan.skiba.poczta@proton.me", label: "Contact" },
+
 ];
 
 export function Menu() {
 
     return (
         <div className="flex items-center justify-between px-5 py-3 ">
-            <div className="inline-flex items-center rounded-2xl border border-white/10 bg-gray-900/20 px-4 py-2 backdrop-blur-md shadow-lg">
-                <span className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 transition-all duration-300" />
-                <span className="relative pointer-events-none text-lg font-bold text-gray-100">
-                    janskiba.dev
-                </span>
-            </div>
+            <Link
+                to="/"><div className="inline-flex items-center rounded-2xl border border-white/10 bg-gray-900/20 px-4 py-2 backdrop-blur-md shadow-lg">
+                    <span className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 transition-all duration-300" />
+                    <span className="relative pointer-events-none text-lg font-bold text-gray-100">
+                        janskiba.dev
+                    </span>
+                </div>
+            </Link>
+
 
 
             <nav aria-label="Menu">
