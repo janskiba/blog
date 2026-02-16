@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.markdown-body{
+  background: transparent !important;
+}
