@@ -10,7 +10,7 @@ function App() {
           <Menu />
         </div>
       </header>
-      <main>
+      <main className="mx-auto max-w-3xl ">
         <Outlet />
       </main>
     </div>

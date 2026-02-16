@@ -7,6 +7,7 @@ const items = [
 ];
 
 export function Menu() {
+
     return (
         <div className="flex items-center justify-between px-5 py-3 ">
             <div className="inline-flex items-center rounded-2xl border border-gray-700/50 bg-linear-to-br from-gray-800/50 to-gray-900/50 px-3 py-1 backdrop-blur-sm">
@@ -26,12 +27,12 @@ export function Menu() {
                                 end
                                 className={({ isActive, isPending }) =>
                                     [
-                                        "inline-flex items-center rounded-xl px-4 py-2 text-sm  font-medium",
+                                        "inline-flex items-center rounded-xl px-4 py-2 text-sm font-medium",
                                         "bg-gray-800/40 backdrop-blur-sm border border-gray-700/50",
-                                        "text-gray-200 transition-all duration-200",
-                                        "hover:bg-gray-800/70 hover:border-blue-500/50 hover:text-blue-200",
+                                        "text-gray-200! visited:text-gray-200 transition-all duration-200",
+                                        "hover:bg-gray-800/70 hover:border-blue-500/50 hover:text-blue-200 visited:hover:text-blue-200",
                                         "focus:outline-none focus:ring-2 focus:ring-blue-500/50",
-                                        isActive ? "bg-blue-500/10 border-blue-500/60 text-blue-200" : "",
+                                        isActive ? "bg-blue-500/10 border-blue-500/60 text-blue-200 visited:text-blue-200" : "",
                                         isPending ? "opacity-70" : "",
                                     ].join(" ")
                                 }
