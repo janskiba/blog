@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br  from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-w-screen min-h-screen bg-linear-to-br  from-gray-900 via-gray-800 to-gray-900">
       <header className="sticky top-0 backdrop-blur-md border-b border-b-slate-600 z-20">
         <div className=" mx-auto  ">
           <Menu />

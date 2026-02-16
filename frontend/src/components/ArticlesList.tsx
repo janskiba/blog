@@ -33,7 +33,7 @@ export function ArticlesListPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen  flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-400 text-lg">Loading articles...</p>
@@ -44,7 +44,7 @@ export function ArticlesListPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen  flex items-center justify-center">
+      <div className="flex items-center justify-center py-12">
         <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-6 max-w-md">
           <p className="text-red-400">{error}</p>
         </div>
