@@ -105,23 +105,23 @@ export function ArticlesListPage() {
         ) : (
           <div className="space-y-6">
             {filtered.map(article => (
-              <article
+              <Link
+                to={`/articles/${article.id}`}
                 key={article.id}
-                className="group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+                className="block group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
               >
                 {/* Subtle gradient overlay on hover */}
                 <div className="absolute inset-0 bg-linear-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-2xl transition-all duration-300"></div>
 
-                <div className="relative">
+                <article className="relative">
                   <h2 className="text-2xl font-bold text-gray-100 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
                     {article.title}
                   </h2>
                   <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
                     {article.summary}
                   </p>
-                  <Link
-                    to={`/articles/${article.id}`}
-                    className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
+                  <span
+                    className="inline-flex items-center gap-2 text-blue-400 group-hover:text-blue-300 font-medium transition-colors duration-200"
                   >
                     Read more
                     <svg
@@ -137,9 +137,9 @@ export function ArticlesListPage() {
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
-                  </Link>
-                </div>
-              </article>
+                  </span>
+                </article>
+              </Link>
             ))}
           </div>
         )}
