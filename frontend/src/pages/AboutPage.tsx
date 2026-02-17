@@ -18,7 +18,7 @@ function Chip({ label }: { label: string }) {
   );
 }
 
-export function About() {
+export function AboutPage() {
   useDocumentTitle("About me");
 
   return (

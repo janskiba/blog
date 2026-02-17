@@ -2,9 +2,9 @@ import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
-import { ArticleDetailsPage } from './components/ArticleDetails'
-import { ArticlesListPage } from './components/ArticlesList'
-import { About } from './components/About'
+import { ArticleDetailsPage } from './pages/ArticleDetailsPage'
+import { ArticlesListPage } from './pages/ArticlesListPage'
+import { AboutPage } from './pages/AboutPage'
 import App from './App'
 import "github-markdown-css/github-markdown.css";
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: <AboutPage />,
       },
     ],
   },
