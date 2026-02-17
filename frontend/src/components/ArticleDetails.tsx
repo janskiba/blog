@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
+import { Loader } from "../components-library/Loader";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -45,7 +46,7 @@ export function ArticleDetailsPage() {
       .join("\n\n");
   }, [article]);
 
-  if (loading) return <div className="mx-auto max-w-3xl p-4">Loading article...</div>;
+  if (loading) return <Loader text="Loading article..." />;
   if (error) return <div className="mx-auto max-w-3xl p-4">{error}</div>;
   if (!article) {
     return (

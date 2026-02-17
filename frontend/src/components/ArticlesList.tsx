@@ -2,6 +2,7 @@ import { useState, useEffect, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
+import { Loader } from "../components-library/Loader";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -34,12 +35,7 @@ export function ArticlesListPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-gray-400 text-lg">Loading articles...</p>
-        </div>
-      </div>
+      <Loader text="Loading articles..." />
     );
   }
 
