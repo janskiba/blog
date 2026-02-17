@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
-import { Error } from "../components-library/Error";
+import { ErrorCard } from "../components-library/ErrorCard";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -49,9 +49,7 @@ export function ArticleDetailsPage() {
 
   if (loading) return <Loader text="Loading article..." />;
   if (error) {
-    return (
-      Error({ message: error, title: "Error loading article" })
-    );
+    return <ErrorCard message={error} title="Error loading article" />;
   }
   if (!article) {
     return (

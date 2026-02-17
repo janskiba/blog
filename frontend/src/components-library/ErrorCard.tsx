@@ -5,7 +5,7 @@ type ErrorStateProps = {
     cardClassName?: string;  // pudełko errora
 };
 
-export function Error({
+export function ErrorCard({
     message,
     title,
     className,

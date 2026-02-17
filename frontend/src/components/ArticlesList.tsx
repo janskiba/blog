@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
-import { Error } from "../components-library/Error";
+import { ErrorCard } from "../components-library/ErrorCard";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -42,7 +42,7 @@ export function ArticlesListPage() {
 
   if (error) {
     return (
-      Error({ message: error, title: "Error loading articles" })
+      <ErrorCard message={error} title="Error loading articles" />
     );
   }
 

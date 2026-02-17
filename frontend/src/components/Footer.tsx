@@ -5,7 +5,7 @@ export function Footer() {
 
   return (
     <footer className="mt-16 border-t border-gray-800/70 bg-gray-950/40">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
         {/* Top */}
         <div className="grid gap-10 md:grid-cols-2 md:items-start">
           {/* Brand */}
@@ -26,7 +26,7 @@ export function Footer() {
 
             <div className="mt-5 pt-5 border-t border-gray-800/60 flex items-center gap-3">
               <a
-                href="https://github.com/"
+                href="https://github.com/janskiba"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-gray-900/40 border border-gray-800/60 text-gray-400 hover:text-gray-100 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/10 transition"
@@ -44,7 +44,7 @@ export function Footer() {
               </a>
 
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/in/jan-skiba-780369208/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-gray-900/40 border border-gray-800/60 text-gray-400 hover:text-gray-100 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/10 transition"
