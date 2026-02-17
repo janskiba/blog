@@ -1,4 +1,5 @@
 import mePhoto from "../assets/about-me.jpeg";
+import { ArrowLink } from "../components-library/ArrowLink";
 
 const TECH = {
   "Frameworks & libraries": ["Angular", "Angular Material", "Bootstrap", "ng-bootstrap", "Leaflet", "Nx"],
@@ -79,22 +80,8 @@ export function About() {
                 ))}
               </div>
 
-              {/* Optional CTA styled like your "Read more" */}
               <div className="pt-2">
-                <a
-                  href="/blog"
-                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
-                >
-                  Read my articles
-                  <svg
-                    className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
+                <ArrowLink to="/blog" text="Read my articles" direction="forward" />
               </div>
             </div>
           </div>

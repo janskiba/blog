@@ -1,6 +1,7 @@
 import { useState, useEffect, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import type { Article } from "../data/articles";
+import { ArrowLink } from "../components-library/ArrowLink";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -106,7 +107,7 @@ export function ArticlesListPage() {
           <div className="space-y-6">
             {filtered.map(article => (
               <Link
-                to={`/articles/${article.id}`}
+                to={`/articles/${article.documentId}`}
                 key={article.id}
                 className="block group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
               >
@@ -120,24 +121,8 @@ export function ArticlesListPage() {
                   <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
                     {article.summary}
                   </p>
-                  <span
-                    className="inline-flex items-center gap-2 text-blue-400 group-hover:text-blue-300 font-medium transition-colors duration-200"
-                  >
-                    Read more
-                    <svg
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </span>
+                  <ArrowLink to={`/articles/${article.documentId}`} text="Read more" direction="forward" />
+
                 </article>
               </Link>
             ))}
