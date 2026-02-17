@@ -2,44 +2,58 @@ import { Link, type LinkProps } from "react-router-dom";
 
 type Direction = "backward" | "forward";
 
-type ArrowLinkProps = Omit<LinkProps, "children"> & {
+type CommonProps = {
   text: string;
   direction?: Direction;
+  className?: string;
 };
 
-function ArrowIcon({ direction }: { direction: "backward" | "forward" }) {
+type ArrowLinkAsLinkProps = CommonProps & { as?: "link" } & Omit<LinkProps, "children">;
+type ArrowLinkAsSpanProps = CommonProps & { as: "span" };
+
+type ArrowLinkProps = ArrowLinkAsLinkProps | ArrowLinkAsSpanProps;
+
+function ArrowIcon({ direction }: { direction: Direction }) {
+  const isBack = direction === "backward";
   return (
     <svg
       className={[
         "w-4 h-4 transition-transform duration-200",
-        direction === "forward" ? "group-hover:translate-x-1" : "group-hover:-translate-x-1 -scale-x-100",
+        isBack ? "-scale-x-100 group-hover:-translate-x-1" : "group-hover:translate-x-1",
       ].join(" ")}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
     >
-      {/* arrow-right style (jak u Ciebie w liście) */}
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
     </svg>
   );
 }
 
-export function ArrowLink({ text, direction = "backward", className, ...linkProps }: ArrowLinkProps) {
-  const isBack = direction === "backward";
+export function ArrowLink(props: ArrowLinkProps) {
+  const { text, direction = "backward", className } = props;
 
-  return (
-    <Link
-      {...linkProps}
+  const content = (
+    <span
       className={[
-        "group inline-flex items-center gap-2  text-blue-400 hover:text-blue-300 transition-colors",
+        " text-blue-400 hover:text-blue-300 group inline-flex items-center gap-2 font-medium transition-colors duration-200",
         className,
-      ].filter(Boolean).join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
-      {isBack && <ArrowIcon direction="backward" />}
+      {direction === "backward" && <ArrowIcon direction="backward" />}
       <span>{text}</span>
-      {!isBack && <ArrowIcon direction="forward" />}
+      {direction === "forward" && <ArrowIcon direction="forward" />}
+    </span>
+  );
+
+  if (props.as === "span") return content;
+
+  const { as, ...linkProps } = props;
+  return (
+    <Link {...linkProps} className={["text-blue-400 hover:text-blue-300 group inline-flex items-center gap-2", className].filter(Boolean).join(" ")}>
+      {content.props.children}
     </Link>
   );
 }
-
-

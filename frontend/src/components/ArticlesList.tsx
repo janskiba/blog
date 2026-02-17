@@ -116,7 +116,7 @@ export function ArticlesListPage() {
                   <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
                     {article.summary}
                   </p>
-                  <ArrowLink to={`/articles/${article.documentId}`} text="Read more" direction="forward" />
+                  <ArrowLink as="span" text="Read more" direction="forward" />
 
                 </article>
               </Link>
