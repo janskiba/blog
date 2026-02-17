@@ -4,12 +4,14 @@ import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  useDocumentTitle("Blog");
 
   useEffect(() => {
     const fetchArticles = async () => {

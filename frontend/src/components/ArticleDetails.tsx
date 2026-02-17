@@ -5,12 +5,14 @@ import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  useDocumentTitle(article?.title ?? "Loading...");
 
   useEffect(() => {
     if (!id) return;

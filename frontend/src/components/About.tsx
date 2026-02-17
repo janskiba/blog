@@ -1,5 +1,6 @@
 import mePhoto from "../assets/about-me.jpeg";
 import { ArrowLink } from "../components-library/ArrowLink";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const TECH = {
   "Frameworks & libraries": ["Angular", "Angular Material", "Bootstrap", "ng-bootstrap", "Leaflet", "Nx"],
@@ -18,6 +19,8 @@ function Chip({ label }: { label: string }) {
 }
 
 export function About() {
+  useDocumentTitle("About me");
+
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
