@@ -30,7 +30,7 @@ export function About() {
 
           <div className="relative grid gap-6 sm:grid-cols-[120px_1fr] sm:items-start">
             {/* Photo */}
-            <div className="flex sm:block">
+            <div className="flex sm:block mx-auto">
               <div className="h-24 w-24 sm:h-28 sm:w-28 rounded-2xl overflow-hidden border border-gray-700/60 bg-gray-800/40">
                 <img
                   src={mePhoto}
@@ -44,7 +44,7 @@ export function About() {
             {/* Content */}
             <div className="space-y-4">
               <div>
-                <h2 className="text-2xl font-bold text-gray-100">
+                <h2 className="text-2xl font-bold text-gray-100 ">
                   About me
                 </h2>
                 <p className="mt-2 text-gray-300 leading-relaxed">
