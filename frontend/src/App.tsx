@@ -5,16 +5,19 @@ import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="w-full min-h-screen bg-linear-to-br  from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen flex flex-col w-full bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
       <header className="sticky top-0 border-t border-gray-800/70 bg-gray-950/40 backdrop-blur-xl z-20">
-          <Menu />
+        <Menu />
       </header>
-      <main className="mx-auto max-w-3xl ">
+
+      <main className="flex-1 mx-auto max-w-5xl w-full">
         <Outlet />
       </main>
+
       <Footer />
     </div>
   )
 }
+
 
 export default App
