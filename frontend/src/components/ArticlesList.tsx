@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
+import { Error } from "../components-library/Error";
 
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -41,11 +42,7 @@ export function ArticlesListPage() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-6 max-w-md">
-          <p className="text-red-400">{error}</p>
-        </div>
-      </div>
+      Error({ message: error, title: "Error loading articles" })
     );
   }
 
