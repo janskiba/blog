@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+      - "24678:24678"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:1337
+    networks:
+      - blog-network
+    stdin_open: true
+    tty: true
+
+  backend:
+    build:
+      context: ./strapi
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=1337
+      - APP_KEYS=toBeModified1,toBeModified2
+      - API_TOKEN_SALT=tobemodified
+      - ADMIN_JWT_SECRET=tobemodified
+      - TRANSFER_TOKEN_SALT=tobemodified
+      - JWT_SECRET=tobemodified
+      - ENCRYPTION_KEY=tobemodified
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_FILENAME=.tmp/data.db
+    volumes:
+      - ./strapi/.tmp:/app/.tmp
+      - ./strapi/public/uploads:/app/public/uploads
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: bridge
