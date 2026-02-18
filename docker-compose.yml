@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   frontend:
@@ -9,37 +9,60 @@ services:
       - "5173:5173"
       - "24678:24678"
     depends_on:
-      - backend
+      - strapi
     environment:
-      - VITE_API_URL=http://localhost:1337
+      - VITE_API_URL=${VITE_API_URL}
     networks:
       - blog-network
     stdin_open: true
     tty: true
 
-  backend:
+  strapi:
     build:
       context: ./strapi
       dockerfile: Dockerfile
     ports:
       - "1337:1337"
+    depends_on:
+      - db
     environment:
       - HOST=0.0.0.0
       - PORT=1337
-      - APP_KEYS=toBeModified1,toBeModified2
-      - API_TOKEN_SALT=tobemodified
-      - ADMIN_JWT_SECRET=tobemodified
-      - TRANSFER_TOKEN_SALT=tobemodified
-      - JWT_SECRET=tobemodified
-      - ENCRYPTION_KEY=tobemodified
-      - DATABASE_CLIENT=sqlite
-      - DATABASE_FILENAME=.tmp/data.db
+
+      - APP_KEYS=${APP_KEYS}
+      - API_TOKEN_SALT=${API_TOKEN_SALT}
+      - ADMIN_JWT_SECRET=${ADMIN_JWT_SECRET}
+      - TRANSFER_TOKEN_SALT=${TRANSFER_TOKEN_SALT}
+      - JWT_SECRET=${JWT_SECRET}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+
+      # DB
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_SSL=${DATABASE_SSL}
     volumes:
-      - ./strapi/.tmp:/app/.tmp
       - ./strapi/public/uploads:/app/public/uploads
+    networks:
+      - blog-network
+
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - blog-network
 
 networks:
   blog-network:
     driver: bridge
+
+volumes:
+  postgres-data:
