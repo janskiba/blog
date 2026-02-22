@@ -12,13 +12,8 @@ export type Article = {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  blocks: RichTextBlock[];
+  text: string; // markdown content
 };
 
 
 
-export type RichTextBlock = {
-  __component: "shared.rich-text";
-  id: number;
-  body: string; // markdown
-};

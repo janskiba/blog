@@ -44,11 +44,8 @@ export function ArticleDetailsPage() {
   }, [id]);
 
   const markdown = useMemo(() => {
-    if (!article?.blocks?.length) return "";
-    return article.blocks
-      .filter((b) => b.__component === "shared.rich-text")
-      .map((b) => b.body)
-      .join("\n\n");
+    if (!article?.text) return "";
+    return article.text;
   }, [article]);
 
   if (loading) return <Loader text="Loading article..." />;
