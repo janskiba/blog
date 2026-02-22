@@ -7,6 +7,8 @@ import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:1337";
+
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState<Article | null>(null);
@@ -23,7 +25,7 @@ export function ArticleDetailsPage() {
 
       try {
         const response = await fetch(
-          `http://localhost:1337/api/articles/${id}?populate=*`
+          `${API_URL}/api/articles/${id}?populate=*`
         );
         if (!response.ok) throw new Error("Failed to fetch article");
 

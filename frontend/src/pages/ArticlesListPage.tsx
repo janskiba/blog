@@ -6,6 +6,8 @@ import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:1337";
+
 export function ArticlesListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ export function ArticlesListPage() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch('http://localhost:1337/api/articles');
+        const response = await fetch(`${API_URL}/api/articles`);
         const json: { data: Article[] } = await response.json();
         setArticles(json.data);
       } catch (err) {

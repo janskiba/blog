@@ -5,25 +5,64 @@ This is a full-stack web application combining a React frontend with a Strapi CM
 
 # Docker Compose Setup
 
-This project uses Docker Compose to run both the frontend and backend applications.
+This project uses separate Docker Compose files for development and production.
 
 ## Prerequisites
 
 - Docker Desktop installed on your machine
 - Docker Compose (comes with Docker Desktop)
 
-## Running the Application
+## Environment file
 
-You can start all services with a single command:
+Create a root `.env` file from `.env.example`:
 
 ```bash
-docker compose up
+cp .env.example .env
 ```
 
-To run in detached mode (background):
+## Shortcut scripts
+
+From the project root:
 
 ```bash
-docker compose up -d
+npm run docker:dev
+npm run docker:dev:detached
+npm run docker:dev:down
+npm run docker:dev:logs
+
+npm run docker:prod
+npm run docker:prod:down
+npm run docker:prod:logs
+```
+
+## Development (Docker + hot reload)
+
+```bash
+docker compose --env-file .env -f docker-compose.dev.yml up --build
+```
+
+Detached:
+
+```bash
+docker compose --env-file .env -f docker-compose.dev.yml up -d --build
+```
+
+Stop:
+
+```bash
+docker compose -f docker-compose.dev.yml down
+```
+
+## Production (Docker)
+
+```bash
+docker compose --env-file .env -f docker-compose.prod.yml up -d --build
+```
+
+Stop:
+
+```bash
+docker compose -f docker-compose.prod.yml down
 ```
 
 ## Accessing the Application
@@ -31,50 +70,51 @@ docker compose up -d
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:1337
 
-## Services
+## Compose files
 
-### Frontend
-- Built with Vite and React
-- Runs on port 5173
-- Uses http-server for serving the production build
-
-### Backend (Strapi)
-- Runs on port 1337
-- Uses SQLite database stored in `.tmp/` directory
-- Uploads directory is persisted in `public/uploads/`
+- `docker-compose.dev.yml`: frontend and Strapi in development mode (hot reload + bind mounts)
+- `docker-compose.prod.yml`: optimized production mode (`vite build` + static nginx, `strapi start`)
 
 ## Useful Commands
 
 ```bash
-# Stop all services
-docker compose down
+# Stop dev services
+docker compose -f docker-compose.dev.yml down
 
-# View logs from all services
-docker compose logs -f
+# Stop prod services
+docker compose -f docker-compose.prod.yml down
+
+# View logs from dev
+docker compose -f docker-compose.dev.yml logs -f
+
+# View logs from prod
+docker compose -f docker-compose.prod.yml logs -f
 
 # View logs from a specific service
-docker compose logs -f frontend
-docker compose logs -f backend
+docker compose -f docker-compose.dev.yml logs -f frontend
+docker compose -f docker-compose.dev.yml logs -f strapi
 
-# Rebuild images (after dependency changes)
-docker compose build --no-cache
+# Rebuild dev images
+docker compose -f docker-compose.dev.yml build --no-cache
 
-# Remove everything including volumes
-docker compose down -v
+# Rebuild prod images
+docker compose -f docker-compose.prod.yml build --no-cache
+
+# Remove everything including dev volumes
+docker compose -f docker-compose.dev.yml down -v
 ```
 
-## Development Mode
+## Local (without Docker)
 
-If you want to run in development mode with hot reload:
+If you prefer running without Docker:
 
-1. Stop the Docker containers: `docker compose down`
-2. Install dependencies locally: `npm install` in both `frontend/` and `strapi/` directories
-3. Run frontend and backend locally:
+1. Install dependencies locally: `npm install` in both `frontend/` and `strapi/`
+2. Run frontend and backend locally:
    - Frontend: `cd frontend && npm run dev`
-   - Backend: `cd strapi && npm run dev` (in another terminal)
+   - Backend: `cd strapi && npm run dev`
 
 ## Troubleshooting
 
-- If port 5173 or 1337 is already in use, change the port mappings in `docker-compose.yml`
+- If port 5173 or 1337 is already in use, change the port mappings in `docker-compose.dev.yml` / `docker-compose.prod.yml`
 - If you get permission issues with volumes, ensure Docker has proper permissions
-- Clear Docker cache if you encounter build issues: `docker compose build --no-cache`
+- Clear Docker cache if you encounter build issues: `docker compose -f docker-compose.dev.yml build --no-cache`

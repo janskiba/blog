@@ -1,0 +1,58 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    ports:
+      - "5173:80"
+    depends_on:
+      - strapi
+    networks:
+      - blog-network
+
+db:
+  image: postgres:16-alpine
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    POSTGRES_DB: ${DATABASE_NAME}
+    POSTGRES_USER: ${DATABASE_USERNAME}
+    POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+  volumes:
+    - db_data:/var/lib/postgresql/data
+  networks: [ strapi ]
+
+strapi:
+  build:
+    context: .
+    dockerfile: Dockerfile.prod
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    NODE_ENV: production
+    DATABASE_CLIENT: postgres
+    DATABASE_HOST: db
+    DATABASE_PORT: 5432
+    DATABASE_NAME: ${DATABASE_NAME}
+    DATABASE_USERNAME: ${DATABASE_USERNAME}
+    DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    JWT_SECRET: ${JWT_SECRET}
+    ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+    APP_KEYS: ${APP_KEYS}
+  volumes:
+    - uploads:/opt/app/public/uploads
+  ports:
+    - "127.0.0.1:1337:1337"
+  depends_on: [ db ]
+  networks: [ strapi ]
+
+volumes:
+  db_data:
+  uploads:
+
+
+networks:
+  strapi:
+    driver: bridge
