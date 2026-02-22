@@ -6,8 +6,7 @@ import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
-
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:1337";
+import { API_URL } from "../config/api";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
