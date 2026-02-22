@@ -74,7 +74,7 @@ export function ArticleDetailsPage() {
           <div className="mt-8 h-px bg-gray-700/60" />
 
           {/* GitHub markdown styling */}
-          <article className="markdown-body mt-8 bg-transparent text-gray-100">
+          <article className="markdown-body mt-8! bg-transparent text-gray-100">
             <ReactMarkdown>{markdown}</ReactMarkdown>
           </article>
         </div>
