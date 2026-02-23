@@ -4,7 +4,7 @@ import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { Seo } from "../components-library/Seo";
 import { API_URL } from "../config/api";
 
 export function ArticlesListPage() {
@@ -12,7 +12,6 @@ export function ArticlesListPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  useDocumentTitle("Blog");
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -51,6 +50,12 @@ export function ArticlesListPage() {
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8">
+      <Seo
+        title="Blog"
+        description="Articles about frontend development, Angular, TypeScript, and modern web engineering."
+        path="/blog"
+      />
+
       <div className="max-w-4xl mx-auto">
         {/* Search Input */}
         <div className="relative mb-8 group">

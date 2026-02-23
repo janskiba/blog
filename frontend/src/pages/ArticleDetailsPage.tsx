@@ -5,15 +5,15 @@ import type { Article } from "../data/articles";
 import { ArrowLink } from "../components-library/ArrowLink";
 import { Loader } from "../components-library/Loader";
 import { ErrorCard } from "../components-library/ErrorCard";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { Seo } from "../components-library/Seo";
 import { API_URL } from "../config/api";
+import { SITE_NAME, buildCanonicalUrl, stripMarkdown } from "../config/seo";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  useDocumentTitle(article?.title ?? "Loading...");
 
   useEffect(() => {
     if (!id) return;
@@ -47,6 +47,31 @@ export function ArticleDetailsPage() {
     return article.text;
   }, [article]);
 
+  const articlePath = id ? `/articles/${id}` : "/blog";
+  const description =
+    article?.summary?.trim() ||
+    (article?.text ? stripMarkdown(article.text, 160) : "Read this blog article.");
+
+  const articleJsonLd = article
+    ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: article.title,
+      description,
+      datePublished: article.publishedAt,
+      dateModified: article.updatedAt,
+      mainEntityOfPage: buildCanonicalUrl(articlePath),
+      author: {
+        "@type": "Person",
+        name: "Jan Skiba",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: SITE_NAME,
+      },
+    }
+    : null;
+
   if (loading) return <Loader text="Loading article..." />;
   if (error) {
     return <ErrorCard message={error} title="Error loading article" />;
@@ -62,6 +87,16 @@ export function ArticleDetailsPage() {
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8">
+      {article ? (
+        <Seo
+          title={article.title}
+          description={description}
+          path={articlePath}
+          type="article"
+          structuredData={articleJsonLd ?? undefined}
+        />
+      ) : null}
+
       <div className=" mx-auto">
         <ArrowLink to="/blog" text="Back to articles" direction="backward" />
 

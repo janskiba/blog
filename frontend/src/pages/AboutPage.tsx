@@ -1,6 +1,6 @@
 import mePhoto from "../assets/about-me.jpeg";
 import { ArrowLink } from "../components-library/ArrowLink";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { Seo } from "../components-library/Seo";
 
 const TECH = {
   "Frameworks & libraries": ["Angular", "Angular Material", "Bootstrap", "ng-bootstrap", "Leaflet", "Nx"],
@@ -19,10 +19,14 @@ function Chip({ label }: { label: string }) {
 }
 
 export function AboutPage() {
-  useDocumentTitle("About me");
-
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8">
+      <Seo
+        title="About me"
+        description="About Jan Skiba, software developer focused on modern Angular and TypeScript web applications."
+        path="/about"
+      />
+
       <div className="max-w-4xl mx-auto">
         <div className="group relative overflow-hidden rounded-2xl p-6 sm:p-8 border border-gray-700/50 backdrop-blur-sm bg-linear-to-br from-gray-800/50 to-gray-900/50 hover:border-blue-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
           {/* hover overlay like in articles */}
