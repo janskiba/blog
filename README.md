@@ -12,29 +12,6 @@ This project uses separate Docker Compose files for development and production.
 - Docker Desktop installed on your machine
 - Docker Compose (comes with Docker Desktop)
 
-## Environment file
-
-Create a root `.env` file from `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-## Shortcut scripts
-
-From the project root:
-
-```bash
-npm run docker:dev
-npm run docker:dev:detached
-npm run docker:dev:down
-npm run docker:dev:logs
-
-npm run docker:prod
-npm run docker:prod:down
-npm run docker:prod:logs
-```
-
 ## Development (Docker + hot reload)
 
 ```bash
