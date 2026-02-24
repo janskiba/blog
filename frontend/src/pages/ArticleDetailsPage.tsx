@@ -8,6 +8,8 @@ import { ErrorCard } from "../components-library/ErrorCard";
 import { Seo } from "../components-library/Seo";
 import { API_URL } from "../config/api";
 import { SITE_NAME, buildCanonicalUrl, stripMarkdown } from "../config/seo";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -110,7 +112,9 @@ export function ArticleDetailsPage() {
 
           {/* GitHub markdown styling */}
           <article className="markdown-body mt-8! bg-transparent text-gray-100">
-            <ReactMarkdown>{markdown}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+              {markdown}
+            </ReactMarkdown>
           </article>
         </div>
 
@@ -118,5 +122,4 @@ export function ArticleDetailsPage() {
       </div>
     </div>
   );
-
 }
