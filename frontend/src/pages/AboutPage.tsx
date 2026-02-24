@@ -3,7 +3,7 @@ import { ArrowLink } from "../components-library/ArrowLink";
 import { Seo } from "../components-library/Seo";
 
 const TECH = {
-  "Frameworks & libraries": ["Angular", "Angular Material", "Bootstrap", "ng-bootstrap", "Leaflet", "Nx"],
+  "Frameworks & libraries": ["Angular", "Angular Material", "Bootstrap", "ng-bootstrap", "Leaflet", "Tailwind CSS", "React"],
   "Languages & styling": ["TypeScript", "JavaScript", "HTML5", "SCSS"],
   "Reactive": ["RxJS", "NgRx", "Angular Signals"],
   "Testing": ["Cypress", "Playwright", "Jasmine"],
