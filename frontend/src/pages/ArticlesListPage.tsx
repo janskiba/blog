@@ -108,8 +108,7 @@ export function ArticlesListPage() {
           <div className="space-y-6">
             {filtered.map(article => (
               <Link
-                to={`/articles/${article.documentId}`}
-                key={article.id}
+                to={`/articles/${article.slug}`}
                 className="block group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
               >
                 {/* Subtle gradient overlay on hover */}
