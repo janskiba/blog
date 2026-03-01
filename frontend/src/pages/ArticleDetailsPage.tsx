@@ -10,6 +10,7 @@ import { API_URL } from "../config/api";
 import { SITE_NAME, buildCanonicalUrl, stripMarkdown } from "../config/seo";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
 
 export function ArticleDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -112,7 +113,7 @@ export function ArticleDetailsPage() {
 
           {/* GitHub markdown styling */}
           <article className="markdown-body mt-8! bg-transparent text-gray-100">
-            <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]}>
               {markdown}
             </ReactMarkdown>
           </article>
