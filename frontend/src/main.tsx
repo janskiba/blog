@@ -6,7 +6,7 @@ import { ArticleDetailsPage } from './pages/ArticleDetailsPage'
 import { ArticlesListPage } from './pages/ArticlesListPage'
 import { AboutPage } from './pages/AboutPage'
 import App from './App'
-import "github-markdown-css/github-markdown.css";
+import "github-markdown-css/github-markdown-dark.css";
 
 const router = createBrowserRouter([
   {
