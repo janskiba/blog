@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light !important;
+  color-scheme: dark !important;
 }
 
 .markdown-body {
