@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -11,7 +11,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link
-              to="/"
+              href="/"
               className="inline-flex items-center gap-2 group"
               aria-label="Go to homepage"
             >
@@ -85,7 +85,7 @@ export function Footer() {
               <li>
                 <Link
                   className="text-gray-400 hover:text-gray-100 transition"
-                  to="/blog"
+                  href="/blog"
                 >
                   Blog
                 </Link>
@@ -93,18 +93,18 @@ export function Footer() {
               <li>
                 <Link
                   className="text-gray-400 hover:text-gray-100 transition"
-                  to="/about"
+                  href="/about"
                 >
                   About
                 </Link>
               </li>
               <li>
-                <Link
+                <a
                   className="text-gray-400 hover:text-gray-100 transition"
-                  to="mailto:jan.skiba.poczta@proton.me"
+                  href="mailto:jan.skiba.poczta@proton.me"
                 >
                   Contact
-                </Link>
+                </a>
               </li>
             </ul>
           </nav>

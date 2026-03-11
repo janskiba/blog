@@ -1,30 +1,34 @@
-import { Link, NavLink } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const items = [
-    { to: "/about", label: "About" },
-    { to: "/blog", label: "Blog" },
-    { to: "mailto:jan.skiba.poczta@proton.me", label: "Contact" },
+const navItems = [
+    { href: "/about", label: "About" },
+    { href: "/blog", label: "Blog" },
 ];
+
+const CONTACT_HREF = "mailto:jan.skiba.poczta@proton.me";
 
 export function Menu() {
     const [open, setOpen] = useState(false);
+    const pathname = usePathname();
 
-    const linkClass = ({ isActive, isPending }: { isActive: boolean; isPending: boolean }) =>
+    const linkClass = (href: string) =>
         [
             "inline-flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-all duration-100",
             "bg-gray-800/30 backdrop-blur-sm border border-white/10 shadow-sm",
             "text-gray-200! visited:text-gray-200",
             "hover:border-blue-500/30 hover:text-blue-200 visited:hover:text-blue-200 hover:shadow-blue-500/20 hover:shadow-sm",
             "focus:outline-none focus:ring-2 focus:ring-blue-500/50",
-            isActive ? "bg-white/10 border-blue-500/50 text-blue-100 visited:text-blue-100 shadow-blue-500/20" : "",
-            isPending ? "opacity-70" : "",
+            pathname === href ? "bg-white/10 border-blue-500/50 text-blue-100 visited:text-blue-100 shadow-blue-500/20" : "",
         ].join(" ");
 
     return (
         <header className="px-5 py-3">
             <div className="flex items-center justify-between">
-                <Link to="/">
+                <Link href="/">
                     <div className="relative inline-flex items-center rounded-2xl border border-white/10 bg-gray-900/20 px-4 py-2 backdrop-blur-sm shadow-lg">
                         <span className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 transition-all duration-300" />
                         <span className="relative pointer-events-none text-lg font-bold text-gray-100">janskiba.dev</span>
@@ -34,13 +38,16 @@ export function Menu() {
                 {/* Desktop menu (sm+) */}
                 <nav aria-label="Menu" className="hidden sm:block">
                     <ul className="flex flex-wrap items-center gap-3">
-                        {items.map((it) => (
-                            <li key={it.to}>
-                                <NavLink to={it.to} end className={linkClass}>
+                        {navItems.map((it) => (
+                            <li key={it.href}>
+                                <Link href={it.href} className={linkClass(it.href)}>
                                     {it.label}
-                                </NavLink>
+                                </Link>
                             </li>
                         ))}
+                        <li>
+                            <a href={CONTACT_HREF} className={linkClass("")}>Contact</a>
+                        </li>
                     </ul>
                 </nav>
 
@@ -87,18 +94,26 @@ export function Menu() {
             >
                 <nav aria-label="Mobile menu">
                     <ul className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-gray-900/30 p-2 backdrop-blur-sm">
-                        {items.map((it) => (
-                            <li key={it.to}>
-                                <NavLink
-                                    to={it.to}
-                                    end
-                                    className={linkClass}
-                                    onClick={() => setOpen(false)} // zamyka menu po kliknięciu linku
+                        {navItems.map((it) => (
+                            <li key={it.href}>
+                                <Link
+                                    href={it.href}
+                                    className={linkClass(it.href)}
+                                    onClick={() => setOpen(false)}
                                 >
                                     {it.label}
-                                </NavLink>
+                                </Link>
                             </li>
                         ))}
+                        <li>
+                            <a
+                                href={CONTACT_HREF}
+                                className={linkClass("")}
+                                onClick={() => setOpen(false)}
+                            >
+                                Contact
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

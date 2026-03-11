@@ -5,6 +5,9 @@ strapi/node_modules/
 # Frontend build artifacts
 frontend/build/
 frontend/dist/
+frontend/.next/
+frontend/.swc/
+frontend/next-env.d.ts
 
 # Strapi build artifacts
 strapi/dist/

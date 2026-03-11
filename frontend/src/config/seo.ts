@@ -1,5 +1,5 @@
 export const SITE_URL =
-    import.meta.env.VITE_SITE_URL?.replace(/\/$/, "") ?? "https://janskiba.dev";
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://janskiba.dev";
 
 export const SITE_NAME = "janskiba.dev";
 

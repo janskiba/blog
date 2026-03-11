@@ -4,9 +4,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
       args:
-        VITE_API_URL: ${VITE_API_URL}
+        API_URL: ${API_URL}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
     ports:
-      - "127.0.0.1:5173:80"
+      - "127.0.0.1:3000:3000"
     depends_on:
       - strapi
     networks:

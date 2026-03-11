@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "github-markdown-css/github-markdown-dark.css";
+
+:root {
+    color-scheme: dark !important;
+}
+
+.markdown-body {
+    background: transparent !important;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.markdown-body ul {
+    list-style: disc;
+}
+
+.markdown-body ol {
+    list-style: decimal;
+}
+
+.markdown-body li {
+    display: list-item;
+}
