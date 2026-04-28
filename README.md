@@ -1,3 +1,6 @@
+# Note
+This is old version of my blog. It's rewritten to astro -> https://github.com/janskiba/blog-astro
+
 # Project Overview
 
 This is a full-stack web application combining a React frontend with a Strapi CMS backend, both containerized and orchestrated using Docker Compose.
